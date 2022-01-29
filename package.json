@@ -1,0 +1,33 @@
+{
+  "name": "chrome-extension-boilerplate",
+  "version": "1.0.0",
+  "description": "Minimal boilerplate code to start your chrome extension",
+  "scripts": {
+    "start": "npm run watch:all",
+    "build": "npm run clean && npm run build:code && npm run copy:static",
+    "build:code": "parcel build src/popup/index.html src/background/hotReload.ts src/background/background.ts src/content/contentScript.ts src/styles/index.css",
+    "copy:static": "copy-and-watch src/manifest.json src/icons/*.png dist",
+    "watch:all": "concurrently \"npm run watch:code\" \"npm run watch:static\"",
+    "watch:code": "parcel watch src/popup/index.html src/background/background.ts src/content/contentScript.ts src/styles/index.css",
+    "watch:static": "copy-and-watch --watch src/manifest.json src/icons/*.png dist",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "chrome extension boilerplate"
+  ],
+  "author": "@thevarunraja",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "concurrently": "^7.0.0",
+    "copy-and-watch": "^0.1.6",
+    "eslint": "^8.6.0",
+    "parcel": "^2.1.1",
+    "postcss-custom-properties": "^12.0.4",
+    "postcss-import": "^14.0.2",
+    "postcss-url": "^10.1.3",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4"
+  }
+}

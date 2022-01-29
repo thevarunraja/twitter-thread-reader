@@ -1,0 +1,25 @@
+{
+  "name": "name of your chrome extension",
+  "description": "description of your chrome extension",
+  "version": "0.1",
+  "manifest_version": 2,
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "browser_action": {
+    "default_popup": "/popup/index.html"
+  },
+  "background": {
+    "scripts": ["/background/hotReload.js", "/background/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["/content/contentscript.js"],
+      "css": ["/styles/index.css"],
+      "run_at": "document_start"
+    }
+  ]
+}
