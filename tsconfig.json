@@ -22,5 +22,5 @@
     "outDir": "dist/lib",
     "downlevelIteration": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "src/inject.js"]
 }

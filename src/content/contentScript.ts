@@ -1,5 +1,11 @@
 export default function init() {
-  console.log("Start writing contentScript JavaScript code");
+  injectScriptToListenForThreadResponse();
+}
+
+function injectScriptToListenForThreadResponse() {
+  const s = document.createElement("script");
+  s.src = chrome.runtime.getURL("inject.js");
+  (document.head || document.documentElement).appendChild(s);
 }
 
 void init();
