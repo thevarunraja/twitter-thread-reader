@@ -19,7 +19,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["inject.js"],
+      "resources": ["threadResponse.js"],
       "matches": ["https://twitter.com/*"]
     }
   ]
