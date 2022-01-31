@@ -1,94 +1,106 @@
-/* FIXME: Refactor Styles */
-[aria-label="Timeline: Conversation"] > div {
-  min-height: 500px !important;
-}
+.thread-reader-mode {
+  div[aria-label="Timeline: Conversation"] > div {
+    min-height: 100vh !important;
+  }
 
-[data-testid="primaryColumn"] {
-  border: 0 !important;
-}
+  .first-tweet-in-thread [data-testid="caret"] {
+    display: none !important;
+  }
 
-.parent-thread-tweet > div {
-  border: 0 !important;
-}
+  [data-testid="primaryColumn"] {
+    border: 0 !important;
+  }
 
-.remove,
-.reply-field,
-.reply-field ~ div {
-  display: none !important;
-}
+  .first-tweet-in-thread > div {
+    border: 0 !important;
+  }
 
-.parent-thread-tweet
+  .first-tweet-metrics-container,
+  .tweet-replies-container ~ div {
+    display: none !important;
+  }
+
+  .tweet-replies-container > div > div {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .tweet-replies-container > div {
+    border-top: 1px solid red !important;
+    width: 45px !important;
+  }
+
+  .source-labels-container div {
+    display: none !important;
+  }
+
+  .first-tweet-in-thread [role="progressbar"] + div {
+    display: none !important;
+  }
+
+  .last-tweet-in-thread ~ div {
+    display: none !important;
+  }
+
+  .first-tweet-in-thread
+    + div
+    + div
+    article
+    > div
+    > div
+    > div
+    > div:nth-child(2)
+    > div:nth-child(2)
+    > div:nth-child(2)
+    > div:nth-child(1) {
+    display: none !important;
+  }
+
+  /* Hide vertical lines */
+  article > div > div > div > div:nth-child(2) > div:nth-child(1) {
+    display: none !important;
+  }
+
+  article > div > div > div > div:nth-child(1) {
+    display: none !important;
+  }
+
+  .first-tweet-in-thread
+    article
+    > div
+    > div
+    > div
+    > div:nth-child(2)
+    > div:nth-child(1) {
+    display: block !important;
+  }
+
+  /* Hide user names on child tweets */
   article
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > div:nth-child(1) {
-  display: block !important;
-}
+    > div
+    > div
+    > div
+    > div:nth-child(2)
+    > div:nth-child(2)
+    > div:nth-child(1) {
+    display: none !important;
+  }
 
-article > div > div > div > div:nth-child(2) > div:nth-child(1) {
-  display: none !important;
-}
+  .first-tweet-in-thread
+    article
+    > div
+    > div
+    > div
+    > div:nth-child(2)
+    > div:nth-child(2)
+    > div:nth-child(1) {
+    display: block !important;
+  }
 
-.parent-thread-tweet
-  article
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > div:nth-child(2)
-  > div:nth-child(1) {
-  display: block !important;
-}
-
-article
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > div:nth-child(2)
-  > div:nth-child(1) {
-  display: none !important;
-}
-
-.parent-thread-tweet
-  + div
-  + div
-  article
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > div:nth-child(2)
-  > div:nth-child(2)
-  > div:nth-child(1) {
-  display: none !important;
-}
-
-article > div > div > div > div:nth-child(1) {
-  display: none !important;
-}
-
-[aria-label*="reply"] > div,
-[aria-label*="replies"] > div {
-  display: none !important;
-}
-
-[aria-label*="reply"],
-[aria-label*="replies"],
-.parent-thread-tweet .source-labels {
-  width: 65px;
-  border: 1px solid red !important;
-}
-
-.last-tweet ~ div {
-  display: none !important;
-}
-
-.last-tweet + div + div {
-  display: block !important;
-  opacity: 0 !important;
-  height: 300px !important;
-  pointer-events: none !important;
+  .last-tweet-in-thread + div + div {
+    display: block !important;
+    opacity: 0 !important;
+    height: 600px !important;
+    pointer-events: none !important;
+  }
 }

@@ -2,6 +2,7 @@
   "plugins": {
     "postcss-import": true,
     "postcss-url": true,
+    "postcss-nested":true,
     "postcss-custom-properties": true,
     "css-has-pseudo":true
   }

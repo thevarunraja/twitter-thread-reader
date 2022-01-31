@@ -6,54 +6,94 @@ function injectScriptToListenForThreadResponse() {
   (document.head || document.documentElement).appendChild(s);
 }
 
-function hideUnnecessaryContent() {
+function addClassToFirstTweetInThread() {
+  const selector = 'div[style*="transform: translateY(0px);"]';
+  document.querySelector(selector)?.classList.add("first-tweet-in-thread");
   // @ts-ignore
-  document.arrive(
-    '[style*="transform: translateY(0px);"]',
-    (node: HTMLElement) => {
-      node?.classList?.add("parent-thread-tweet");
-    }
-  );
-
-  // @ts-ignore
-  document.arrive('a[href$="/retweets"]', (node: HTMLElement) => {
-    node?.parentElement?.parentElement?.parentElement?.classList?.add("remove");
+  document.arrive(selector, (node: HTMLElement) => {
+    node?.classList?.add("first-tweet-in-thread");
   });
+}
 
-  // @ts-ignore
-  document.arrive(
-    'a[href$="/how-to-tweet#source-labels"]',
-    (node: HTMLElement) => {
-      node?.parentElement?.parentElement?.classList?.add("remove");
-      node?.parentElement?.parentElement?.parentElement?.classList?.add(
-        "source-labels"
-      );
-    }
-  );
-
-  // @ts-ignore
-  document.arrive(
-    '[aria-label="Timeline: Conversation"] [aria-label="Reply"][data-testid="reply"]',
-    (node: HTMLElement) => {
-      node?.parentElement?.parentElement?.parentElement?.classList.add(
-        "reply-field"
-      );
-    }
-  );
-
+function addClassToLastTweetInThread() {
   const lastTweetId = JSON.parse(
     sessionStorage.getItem(
       `thread-${document.location.pathname.split("/")?.pop()}`
     ) as string
   )?.pop();
+  const selector = `article a[href*="/${lastTweetId}"]`;
+  document
+    .querySelector(selector)
+    ?.closest("div>article")
+    ?.parentElement?.parentElement?.parentElement?.classList.add(
+      "last-tweet-in-thread"
+    );
   // @ts-ignore
-  document.arrive(`article a[href*="/${lastTweetId}"]`, (node: HTMLElement) => {
+  document.arrive(selector, (node: HTMLElement) => {
     node
       ?.closest("div>article")
       ?.parentElement?.parentElement?.parentElement?.classList.add(
-        "last-tweet"
+        "last-tweet-in-thread"
       );
   });
+}
+
+function addClassToThreadMetricsContainer() {
+  const selector = 'a[href$="/retweets"]';
+  document
+    .querySelector(selector)
+    ?.parentElement?.parentElement?.parentElement?.classList?.add(
+      "first-tweet-metrics-container"
+    );
+  // @ts-ignore
+  document.arrive(selector, (node: HTMLElement) => {
+    node?.parentElement?.parentElement?.parentElement?.classList?.add(
+      "first-tweet-metrics-container"
+    );
+  });
+}
+
+function addClassToSourceLabelsContainer() {
+  const selector = 'a[href$="/how-to-tweet#source-labels"]';
+  document
+    .querySelector(selector)
+    ?.parentElement?.parentElement?.parentElement?.classList?.add(
+      "source-labels-container"
+    );
+  //@ts-ignore
+  document.arrive(selector, (node: HTMLElement) => {
+    node?.parentElement?.parentElement?.parentElement?.classList?.add(
+      "source-labels-container"
+    );
+  });
+}
+
+function addClassToTweetRepliesContainer() {
+  try {
+    const selector =
+      '[aria-label="Timeline: Conversation"] [data-testid="reply"]';
+    [...document.querySelectorAll(selector)]?.forEach((node) =>
+      node?.parentElement?.parentElement?.parentElement?.classList?.add(
+        "tweet-replies-container"
+      )
+    );
+    // @ts-ignore
+    document.arrive(selector, (node: HTMLElement) => {
+      node?.parentElement?.parentElement?.parentElement?.classList.add(
+        "tweet-replies-container"
+      );
+    });
+  } catch (error) {
+    // Handle errors
+  }
+}
+
+function hideUnnecessaryContent() {
+  addClassToFirstTweetInThread();
+  addClassToThreadMetricsContainer();
+  addClassToSourceLabelsContainer();
+  addClassToLastTweetInThread();
+  addClassToTweetRepliesContainer();
 }
 
 export default function init() {
@@ -64,7 +104,6 @@ export default function init() {
         document.querySelector("main h2>span")?.textContent?.toLowerCase() ===
         "thread"
       ) {
-        // FIXME:
         document
           .getElementById("react-root")
           ?.classList.add("thread-reader-mode");
