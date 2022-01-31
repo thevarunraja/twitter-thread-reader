@@ -31,6 +31,11 @@
                 data.entries[0].entryId.startsWith("tweet-") &&
                 data.entries[1].entryId.startsWith("conversationthread-")
               ) {
+                new CustomEvent("animalfound", {
+                  detail: {
+                    name: "cat",
+                  },
+                });
                 console.log(data);
                 const threadData = [
                   data.entries[0].entryId.split("-")[1],
@@ -42,6 +47,12 @@
                   `thread-${data.entries[0].entryId.split("-")[1]}`,
                   JSON.stringify(threadData)
                 );
+                const tweetDetailEvent = new CustomEvent("tweetDetailEvent", {
+                  bubbles: true,
+                  cancelable: true,
+                  composed: false,
+                });
+                document.querySelector("body").dispatchEvent(tweetDetailEvent);
                 console.log(
                   JSON.parse(
                     sessionStorage.getItem(
@@ -49,12 +60,11 @@
                     )
                   )
                 );
+              } else {
+                document.querySelector("body")?.removeAttribute("class");
               }
             }
-          } catch (err) {
-            console.log("Error in responseType try catch");
-            console.log(err);
-          }
+          } catch (err) {}
         }
       }
     });
