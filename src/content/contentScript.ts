@@ -96,6 +96,40 @@ function hideUnnecessaryContent() {
   addClassToTweetRepliesContainer();
 }
 
+function enableThreadReaderMode() {
+  window.scrollTo(0, 0);
+  document.getElementById("react-root")?.classList.add("thread-reader-mode");
+  hideUnnecessaryContent();
+}
+
+function disableThreadReaderMode() {
+  window.scrollTo(0, 0);
+  document.getElementById("react-root")?.classList.remove("thread-reader-mode");
+}
+
+document.addEventListener("click", function (event) {
+  // @ts-ignore
+  if (document.getElementById("open-reader-mode")?.contains(event.target)) {
+    enableThreadReaderMode();
+  } else if (
+    document
+      .querySelector('[aria-label="Timeline: Conversation"]')
+      // @ts-ignore
+      ?.contains(event.target)
+  ) {
+    //
+  } else if (
+    document
+      .querySelector('[aria-labelledby="modal-header"]')
+      // @ts-ignore
+      ?.contains(event.target)
+  ) {
+    //
+  } else {
+    disableThreadReaderMode();
+  }
+});
+
 export default function init() {
   injectScriptToListenForThreadResponse();
   document.addEventListener("DOMContentLoaded", () => {
@@ -113,30 +147,6 @@ export default function init() {
       }
     });
   });
-}
-
-document.addEventListener("click", function (event) {
-  // @ts-ignore
-  if (
-    !document
-      .querySelector('[data-testid="primaryColumn"]')
-      // @ts-ignore
-      ?.contains(event.target)
-  ) {
-    window.scrollTo(0, 0);
-    document
-      .getElementById("react-root")
-      ?.classList.remove("thread-reader-mode");
-  }
-  // @ts-ignore
-  if (document.getElementById("open-reader-mode")?.contains(event.target)) {
-    handleThreadReaderMode();
-  }
-});
-
-function handleThreadReaderMode() {
-  document.getElementById("react-root")?.classList.add("thread-reader-mode");
-  hideUnnecessaryContent();
 }
 
 void init();

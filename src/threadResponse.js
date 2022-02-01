@@ -27,16 +27,7 @@
             if (this?.responseURL?.indexOf("TweetDetail") > 1) {
               const data = JSON.parse(this.response).data
                 .threaded_conversation_with_injections.instructions[0];
-              if (
-                data.entries[0].entryId.startsWith("tweet-") &&
-                data.entries[1].entryId.startsWith("conversationthread-")
-              ) {
-                new CustomEvent("animalfound", {
-                  detail: {
-                    name: "cat",
-                  },
-                });
-                console.log(data);
+              if (data.entries[0].entryId.startsWith("tweet-")) {
                 const threadData = [
                   data.entries[0].entryId.split("-")[1],
                   ...data.entries[1].content.items.map(

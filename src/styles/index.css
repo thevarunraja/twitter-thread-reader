@@ -12,6 +12,17 @@
 }
 
 .thread-reader-mode {
+  header[role="banner"],
+  [data-testid="sidebarColumn"] {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  [data-testid="primaryColumn"] > div > div > div:nth-child(1) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
   div[aria-label="Timeline: Conversation"] > div {
     min-height: 100vh !important;
   }
