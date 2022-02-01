@@ -1,3 +1,16 @@
+#open-reader-mode {
+  background: none;
+  position: absolute;
+  right: 0;
+  padding: 0;
+  border: 1px solid;
+  border-radius: 9999px;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 .thread-reader-mode {
   div[aria-label="Timeline: Conversation"] > div {
     min-height: 100vh !important;

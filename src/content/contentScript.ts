@@ -39,7 +39,7 @@ function addClassToLastTweetInThread() {
 }
 
 function addClassToThreadMetricsContainer() {
-  const selector = 'a[href$="/retweets"]';
+  const selector = 'a[href*="/retweets"]';
   document
     .querySelector(selector)
     ?.parentElement?.parentElement?.parentElement?.classList?.add(
@@ -105,12 +105,38 @@ export default function init() {
         "thread"
       ) {
         document
-          .getElementById("react-root")
-          ?.classList.add("thread-reader-mode");
-        hideUnnecessaryContent();
+          .querySelector(`[data-testid="primaryColumn"] h2`)
+          ?.parentElement?.parentElement?.insertAdjacentHTML(
+            "beforeend",
+            `<button id="open-reader-mode">View Thread in Reader mode</button>`
+          );
       }
     });
   });
+}
+
+document.addEventListener("click", function (event) {
+  // @ts-ignore
+  if (
+    !document
+      .querySelector('[data-testid="primaryColumn"]')
+      // @ts-ignore
+      ?.contains(event.target)
+  ) {
+    window.scrollTo(0, 0);
+    document
+      .getElementById("react-root")
+      ?.classList.remove("thread-reader-mode");
+  }
+  // @ts-ignore
+  if (document.getElementById("open-reader-mode")?.contains(event.target)) {
+    handleThreadReaderMode();
+  }
+});
+
+function handleThreadReaderMode() {
+  document.getElementById("react-root")?.classList.add("thread-reader-mode");
+  hideUnnecessaryContent();
 }
 
 void init();
