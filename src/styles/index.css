@@ -107,7 +107,8 @@
     > div:nth-child(2)
     > div:nth-child(2)
     > div:nth-child(1) {
-    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   .first-tweet-in-thread
@@ -118,6 +119,8 @@
     > div:nth-child(2)
     > div:nth-child(2)
     > div:nth-child(1) {
+    opacity: 1 !important;
+    pointer-events: all !important;
     display: block !important;
   }
 

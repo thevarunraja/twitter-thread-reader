@@ -15,6 +15,7 @@
     "watch:static": "copy-and-watch --watch src/manifest.json src/threadResponse.js src/icons/*.png dist"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "concurrently": "^7.0.0",
@@ -37,6 +38,7 @@
     "insertion-query": "^1.1.0",
     "jsincss": "^2.2.2",
     "jsincss-has-selector": "^2.0.2",
-    "jsincss-parent-selector": "^2.0.2"
+    "jsincss-parent-selector": "^2.0.2",
+    "lodash": "^4.17.21"
   }
 }
