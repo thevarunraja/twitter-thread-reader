@@ -17,6 +17,14 @@
 }
 
 .thread-reader-mode {
+  body,
+  div,
+  span,
+  a,
+  label {
+    font-size: 16px !important;
+  }
+
   header[role="banner"],
   [data-testid="sidebarColumn"] {
     opacity: 0 !important;

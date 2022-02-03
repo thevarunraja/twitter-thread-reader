@@ -144,7 +144,6 @@ export function checkForAddingReaderButton() {
 }
 
 export function disableThreadReaderMode() {
-  window.scrollTo(0, 0);
   document.getElementById("open-reader-mode")?.remove();
   document.getElementById("react-root")?.classList.remove("thread-reader-mode");
   // @ts-ignore
