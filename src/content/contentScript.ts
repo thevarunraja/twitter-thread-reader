@@ -10,7 +10,6 @@ import {
 document.addEventListener("click", function (event) {
   // @ts-ignore
   if (event.target && event.target.id === "open-reader-mode") {
-    console.log("In first");
     enableThreadReaderMode();
   } else if (
     document
@@ -27,7 +26,6 @@ document.addEventListener("click", function (event) {
   ) {
     //
   } else {
-    console.log("In fourth");
     disableThreadReaderMode();
   }
 });
@@ -37,7 +35,6 @@ export default function init() {
   document.addEventListener("DOMContentLoaded", () => {
     checkForThemeChanges();
     document.querySelector("body")?.addEventListener("tweetDetailEvent", () => {
-      console.log("tweetDetailEvent");
       if (
         document.querySelector("main h2>span")?.textContent?.toLowerCase() ===
         "thread"

@@ -36,7 +36,7 @@
                 ];
                 sessionStorage.setItem(
                   `thread-${data.entries[0].entryId.split("-")[1]}`,
-                  JSON.stringify(threadData)
+                  JSON.stringify(threadData.filter((id) => id.length > 1))
                 );
                 const tweetDetailEvent = new CustomEvent("tweetDetailEvent", {
                   bubbles: true,
@@ -51,11 +51,11 @@
                     )
                   )
                 );
-              } else {
-                document.querySelector("body")?.removeAttribute("class");
               }
             }
-          } catch (err) {}
+          } catch (err) {
+            console.error(err);
+          }
         }
       }
     });

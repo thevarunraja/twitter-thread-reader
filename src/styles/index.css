@@ -11,6 +11,11 @@
   cursor: pointer;
 }
 
+.theme-0 #open-reader-mode {
+  border: 1px solid #000;
+  color: #000;
+}
+
 .thread-reader-mode {
   header[role="banner"],
   [data-testid="sidebarColumn"] {
@@ -39,6 +44,10 @@
     border: 0 !important;
   }
 
+  .tweet-replies-container {
+    height: 10px !important;
+  }
+
   .first-tweet-metrics-container,
   .tweet-replies-container ~ div {
     display: none !important;
@@ -54,7 +63,8 @@
     width: 45px !important;
   }
 
-  .source-labels-container div {
+  .source-labels-container div,
+  .source-labels-container + div {
     display: none !important;
   }
 
