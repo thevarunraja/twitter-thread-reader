@@ -112,6 +112,7 @@ export function checkForURLChanges() {
 
 export function enableThreadReaderMode() {
   checkForURLChanges();
+  addCloseButton();
   window.scrollTo(0, 0);
   document.getElementById("react-root")?.classList.add("thread-reader-mode");
   addClassToFirstTweetInThread();
@@ -119,6 +120,15 @@ export function enableThreadReaderMode() {
   addClassToSourceLabelsContainer();
   addClassToLastTweetInThread();
   addClassToTweetRepliesContainer();
+}
+
+export function addCloseButton() {
+  document?.getElementById("react-root")?.insertAdjacentHTML(
+    "afterbegin",
+    `<button id="close-thread-reader-view"><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    </svg></button>`
+  );
 }
 
 export function checkForAddingReaderButton(parentTweetId = "") {
@@ -154,6 +164,7 @@ export function disableThreadReaderMode() {
   // @ts-ignore
   document.unbindArrive();
   document.getElementById("open-reader-mode")?.remove();
+  document.getElementById("close-thread-reader-view")?.remove();
   document.getElementById("react-root")?.classList.remove("thread-reader-mode");
   checkForAddingReaderButton();
 }

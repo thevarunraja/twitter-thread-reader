@@ -16,6 +16,14 @@
   color: #000;
 }
 
+#close-thread-reader-view {
+  display: none;
+}
+
+.theme-0 #close-thread-reader-view {
+  color: #000 !important;
+}
+
 .thread-reader-mode {
   body,
   div,
@@ -23,6 +31,23 @@
   a,
   label {
     font-size: 18px !important;
+  }
+
+  #close-thread-reader-view {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    cursor: pointer;
+    z-index: 9;
+    svg {
+      width: 45px;
+      height: 45px;
+    }
   }
 
   header[role="banner"],
