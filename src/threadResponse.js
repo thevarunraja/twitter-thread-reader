@@ -27,35 +27,46 @@
             if (this?.responseURL?.indexOf("TweetDetail") > 1) {
               const data = JSON.parse(this.response).data
                 .threaded_conversation_with_injections.instructions[0];
-              if (data.entries[0].entryId.startsWith("tweet-")) {
-                const threadData = [
-                  data.entries[0].entryId.split("-")[1],
-                  ...data.entries[1].content.items.map(
-                    (item) => item.entryId.split("-")[3]
-                  ),
-                ];
-                sessionStorage.setItem(
-                  `thread-${data.entries[0].entryId.split("-")[1]}`,
-                  JSON.stringify(threadData.filter((id) => id.length > 1))
-                );
+              if (
+                data.entries[0].entryId.startsWith(
+                  `tweet-${window.location.href.split("?")[0].split("/").pop()}`
+                )
+              ) {
+                try {
+                  const threadData = [
+                    data.entries[0].entryId.split("-")[1],
+                    ...data.entries[1].content.items.map(
+                      (item) => item.entryId.split("-")[3]
+                    ),
+                  ];
+                  sessionStorage.setItem(
+                    `thread-${data.entries[0].entryId.split("-")[1]}`,
+                    JSON.stringify(threadData.filter((id) => id.length > 1))
+                  );
+                  const tweetDetailEvent = new CustomEvent("tweetDetailEvent", {
+                    bubbles: true,
+                    cancelable: true,
+                    composed: false,
+                  });
+                  document
+                    .querySelector("body")
+                    .dispatchEvent(tweetDetailEvent);
+                } catch (error) {}
+              } else {
                 const tweetDetailEvent = new CustomEvent("tweetDetailEvent", {
                   bubbles: true,
                   cancelable: true,
                   composed: false,
+                  detail: {
+                    shouldNavigateToViewTweet:
+                      data.entries[1].content.itemContent.tweet_results.result
+                        .legacy.conversation_id_str,
+                  },
                 });
                 document.querySelector("body").dispatchEvent(tweetDetailEvent);
-                console.log(
-                  JSON.parse(
-                    sessionStorage.getItem(
-                      `thread-${document.location.pathname.split("/")?.pop()}`
-                    )
-                  )
-                );
               }
             }
-          } catch (err) {
-            console.error(err);
-          }
+          } catch (err) {}
         }
       }
     });

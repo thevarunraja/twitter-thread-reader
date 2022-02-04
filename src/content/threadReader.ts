@@ -121,7 +121,7 @@ export function enableThreadReaderMode() {
   addClassToTweetRepliesContainer();
 }
 
-export function checkForAddingReaderButton() {
+export function checkForAddingReaderButton(parentTweetId = "") {
   if (
     document.querySelector("main h2>span")?.textContent?.toLowerCase() ===
     "thread"
@@ -137,16 +137,23 @@ export function checkForAddingReaderButton() {
         .querySelector(`[data-testid="primaryColumn"] h2`)
         ?.parentElement?.parentElement?.insertAdjacentHTML(
           "beforeend",
-          `<button id="open-reader-mode">View Thread in Reader mode</button>`
+          `<button id="open-reader-mode" class="open-reader-mode">View Thread in Reader mode</button>`
+        );
+    } else {
+      document
+        .querySelector(`[data-testid="primaryColumn"] h2`)
+        ?.parentElement?.parentElement?.insertAdjacentHTML(
+          "beforeend",
+          `<button id="navigate-to-view-thread" class="open-reader-mode" data-parentTweetId="${parentTweetId}">View Thread in Reader mode</button>`
         );
     }
   }
 }
 
 export function disableThreadReaderMode() {
-  document.getElementById("open-reader-mode")?.remove();
-  document.getElementById("react-root")?.classList.remove("thread-reader-mode");
   // @ts-ignore
   document.unbindArrive();
+  document.getElementById("open-reader-mode")?.remove();
+  document.getElementById("react-root")?.classList.remove("thread-reader-mode");
   checkForAddingReaderButton();
 }
