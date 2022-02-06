@@ -166,7 +166,7 @@ export function disableThreadReaderMode() {
   // @ts-ignore
   document.unbindArrive();
   // @ts-ignore
-  document.urlChangeObserver.disconnect();
+  document.urlChangeObserver?.disconnect();
   document.getElementById("open-reader-mode")?.remove();
   document.getElementById("close-thread-reader-view")?.remove();
   document.getElementById("react-root")?.classList.remove("thread-reader-mode");
