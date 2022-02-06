@@ -6,7 +6,7 @@
   "author": "@thevarunraja",
   "scripts": {
     "build": "npm run clean && npm run build:code && npm run copy:static",
-    "build:code": "parcel build src/content/contentScript.ts src/styles/index.css",
+    "build:code": "parcel build --no-source-maps src/content/contentScript.ts src/styles/index.css",
     "clean": "rm -rf dist",
     "copy:static": "copy-and-watch src/threadResponse.js src/manifest.json src/icons/*.png dist",
     "dev": "set NODE_ENV=development && npm run watch:all",
