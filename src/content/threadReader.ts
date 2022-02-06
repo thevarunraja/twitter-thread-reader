@@ -100,12 +100,19 @@ export function addClassToTweetRepliesContainer() {
 
 export function checkForURLChanges() {
   let oldHref = document.location.href;
+  let oldPathName = document.location.pathname?.replaceAll("/", "__");
   // @ts-ignore
   document.urlChangeObserver = new MutationObserver(function () {
     if (location.href !== oldHref && location.href.indexOf("photo") <= -1) {
       oldHref = location.href;
       disableThreadReaderMode();
     }
+
+    document.querySelector<HTMLElement>("html")?.classList.remove(oldPathName);
+    oldPathName = document.location.pathname?.replaceAll("/", "__");
+    document
+      .querySelector<HTMLElement>("html")
+      ?.classList.add(document.location.pathname?.replaceAll("/", "__"));
   });
   const config = { subtree: true, childList: true };
   // @ts-ignore

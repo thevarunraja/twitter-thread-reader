@@ -24,6 +24,13 @@
   color: #000 !important;
 }
 
+html[class*="__photo__"] {
+  #close-thread-reader-view {
+    z-index: 0;
+    display: none;
+  }
+}
+
 .thread-reader-mode {
   body,
   div,
@@ -43,7 +50,7 @@
     cursor: pointer;
     border: 0;
     cursor: pointer;
-    z-index: 9;
+    z-index: 1;
     svg {
       width: 45px;
       height: 45px;
