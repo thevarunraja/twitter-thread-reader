@@ -11,17 +11,21 @@
   cursor: pointer;
 }
 
-.theme-0 .open-reader-mode {
-  border: 1px solid #000;
-  color: #000;
+.theme-0,
+[style="background-color: rgb(255, 255, 255);"],
+[style="background-color: #FFFFFF;"] {
+  .open-reader-mode {
+    border: 1px solid #000;
+    color: #000;
+  }
+
+  #close-thread-reader-view {
+    color: #000 !important;
+  }
 }
 
 #close-thread-reader-view {
   display: none;
-}
-
-.theme-0 #close-thread-reader-view {
-  color: #000 !important;
 }
 
 html[class*="__photo__"] {
@@ -38,6 +42,8 @@ html[class*="__photo__"] {
   a,
   label {
     font-size: 18px !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.8px !important;
   }
 
   #close-thread-reader-view {
@@ -185,7 +191,9 @@ html[class*="__photo__"] {
   }
 }
 
-.theme-0 {
+.theme-0,
+[style="background-color: rgb(255, 255, 255);"],
+[style="background-color: #FFFFFF;"] {
   .thread-reader-mode {
     .tweet-replies-container > div {
       border-top: 1px solid #d7d7d7 !important;
@@ -193,7 +201,9 @@ html[class*="__photo__"] {
   }
 }
 
-.theme-1 {
+.theme-1,
+[style="background-color: rgb(21, 32, 43);"],
+[style="background-color: #15202B;"] {
   .thread-reader-mode {
     .tweet-replies-container > div {
       border-top: 1px solid #38444d !important;
@@ -201,7 +211,9 @@ html[class*="__photo__"] {
   }
 }
 
-.theme-2 {
+.theme-2,
+[style="background-color: rgb(0, 0, 0);"],
+[style="background-color: #000000;"] {
   .thread-reader-mode {
     .tweet-replies-container > div {
       border-top: 1px solid #2f3336 !important;
