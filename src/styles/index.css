@@ -35,7 +35,7 @@
 
   #close-thread-reader-view {
     display: block;
-    position: absolute;
+    position: fixed;
     top: 30px;
     left: 30px;
     background: none;
@@ -92,8 +92,7 @@
   }
 
   .tweet-replies-container > div {
-    border-top: 1px solid #d7d7d7 !important;
-    width: 45px !important;
+    width: 32px !important;
   }
 
   .source-labels-container div,
@@ -107,6 +106,10 @@
 
   .last-tweet-in-thread ~ div {
     display: none !important;
+  }
+
+  .last-tweet-in-thread > div {
+    border-bottom: 0 !important;
   }
 
   .first-tweet-in-thread
@@ -172,5 +175,29 @@
     opacity: 0 !important;
     height: 600px !important;
     pointer-events: none !important;
+  }
+}
+
+.theme-0 {
+  .thread-reader-mode {
+    .tweet-replies-container > div {
+      border-top: 1px solid #d7d7d7 !important;
+    }
+  }
+}
+
+.theme-1 {
+  .thread-reader-mode {
+    .tweet-replies-container > div {
+      border-top: 1px solid #38444d !important;
+    }
+  }
+}
+
+.theme-2 {
+  .thread-reader-mode {
+    .tweet-replies-container > div {
+      border-top: 1px solid #2f3336 !important;
+    }
   }
 }
