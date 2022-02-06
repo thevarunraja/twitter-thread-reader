@@ -39,18 +39,27 @@
                       (item) => item.entryId.split("-")[3]
                     ),
                   ];
-                  sessionStorage.setItem(
-                    `thread-${data.entries[0].entryId.split("-")[1]}`,
-                    JSON.stringify(threadData.filter((id) => id.length > 1))
-                  );
-                  const tweetDetailEvent = new CustomEvent("tweetDetailEvent", {
-                    bubbles: true,
-                    cancelable: true,
-                    composed: false,
-                  });
-                  document
-                    .querySelector("body")
-                    .dispatchEvent(tweetDetailEvent);
+                  if (
+                    data.entries[1].content.items[
+                      data.entries[1].content.items.length - 1
+                    ].entryId.indexOf("showmore") <= -1
+                  ) {
+                    sessionStorage.setItem(
+                      `thread-${data.entries[0].entryId.split("-")[1]}`,
+                      JSON.stringify(threadData.filter((id) => id.length > 1))
+                    );
+                    const tweetDetailEvent = new CustomEvent(
+                      "tweetDetailEvent",
+                      {
+                        bubbles: true,
+                        cancelable: true,
+                        composed: false,
+                      }
+                    );
+                    document
+                      .querySelector("body")
+                      .dispatchEvent(tweetDetailEvent);
+                  }
                 } catch (error) {}
               } else {
                 const tweetDetailEvent = new CustomEvent("tweetDetailEvent", {

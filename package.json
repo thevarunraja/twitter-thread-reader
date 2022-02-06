@@ -9,7 +9,7 @@
     "build:code": "parcel build src/content/contentScript.ts src/styles/index.css",
     "clean": "rm -rf dist",
     "copy:static": "copy-and-watch src/threadResponse.js src/manifest.json src/icons/*.png dist",
-    "dev": "npm run watch:all",
+    "dev": "set NODE_ENV=development && npm run watch:all",
     "watch:all": "concurrently \"npm run watch:code\" \"npm run watch:static\"",
     "watch:code": "parcel watch src/content/contentScript.ts src/styles/index.css",
     "watch:static": "copy-and-watch --watch src/manifest.json src/threadResponse.js src/icons/*.png dist"
