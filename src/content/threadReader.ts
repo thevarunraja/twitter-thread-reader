@@ -81,7 +81,7 @@ export function addClassToSourceLabelsContainer() {
 export function addClassToTweetRepliesContainer() {
   try {
     const selector =
-      '[aria-label="Timeline: Conversation"] [data-testid="reply"]';
+      '[aria-label="Timeline: Conversation"] [data-testid="retweet"]';
     [...document.querySelectorAll(selector)]?.forEach((node) =>
       node?.parentElement?.parentElement?.parentElement?.classList?.add(
         "tweet-replies-container"
@@ -116,7 +116,7 @@ export function checkForURLChanges() {
   });
   const config = { subtree: true, childList: true };
   // @ts-ignore
-  document.urlChangeObserver.observe(document, config);
+  document.urlChangeObserver.observe(document.querySelector("head"), config);
 }
 
 export function enableThreadReaderMode() {
@@ -170,14 +170,14 @@ export function checkForAddingReaderButton(parentTweetId = "") {
 }
 
 export function disableThreadReaderMode() {
-  // @ts-ignore
-  document.unbindArrive();
-  // @ts-ignore
-  document.urlChangeObserver?.disconnect();
   document.getElementById("open-reader-mode")?.remove();
   document.getElementById("close-thread-reader-view")?.remove();
   document.getElementById("react-root")?.classList.remove("thread-reader-mode");
   checkForAddingReaderButton();
+  // @ts-ignore
+  document.unbindArrive();
+  // @ts-ignore
+  document.urlChangeObserver?.disconnect();
 }
 
 export function addListenersToDOM() {
