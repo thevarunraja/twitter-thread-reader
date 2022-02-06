@@ -100,14 +100,16 @@ export function addClassToTweetRepliesContainer() {
 
 export function checkForURLChanges() {
   let oldHref = document.location.href;
-  const observer = new MutationObserver(function () {
+  // @ts-ignore
+  document.urlChangeObserver = new MutationObserver(function () {
     if (location.href !== oldHref && location.href.indexOf("photo") <= -1) {
       oldHref = location.href;
       disableThreadReaderMode();
     }
   });
   const config = { subtree: true, childList: true };
-  observer.observe(document, config);
+  // @ts-ignore
+  document.urlChangeObserver.observe(document, config);
 }
 
 export function enableThreadReaderMode() {
@@ -163,6 +165,8 @@ export function checkForAddingReaderButton(parentTweetId = "") {
 export function disableThreadReaderMode() {
   // @ts-ignore
   document.unbindArrive();
+  // @ts-ignore
+  document.urlChangeObserver.disconnect();
   document.getElementById("open-reader-mode")?.remove();
   document.getElementById("close-thread-reader-view")?.remove();
   document.getElementById("react-root")?.classList.remove("thread-reader-mode");
