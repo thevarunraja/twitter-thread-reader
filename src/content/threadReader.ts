@@ -1,3 +1,5 @@
+import styles from "./threadReaderModeStyles";
+
 export function injectScriptToListenForThreadResponse() {
   const s = document.createElement("script");
   s.src = chrome.runtime.getURL("threadResponse.js");
@@ -101,13 +103,13 @@ export function addClassToTweetRepliesContainer() {
 export function checkForURLChanges() {
   let oldHref = document.location.href;
   let oldPathName = document.location.pathname?.replaceAll("/", "__");
-  // @ts-ignore
-  document.urlChangeObserver = new MutationObserver(function () {
+
+  const urlChangeObserver = new MutationObserver(function () {
     if (location.href !== oldHref && location.href.indexOf("photo") <= -1) {
       oldHref = location.href;
       disableThreadReaderMode();
     }
-
+    checkForAddingReaderButton();
     document.querySelector<HTMLElement>("html")?.classList.remove(oldPathName);
     oldPathName = document.location.pathname?.replaceAll("/", "__");
     document
@@ -115,12 +117,11 @@ export function checkForURLChanges() {
       ?.classList.add(document.location.pathname?.replaceAll("/", "__"));
   });
   const config = { subtree: true, childList: true };
-  // @ts-ignore
-  document.urlChangeObserver.observe(document.querySelector("head"), config);
+  urlChangeObserver.observe(document.querySelector("head") as Node, config);
 }
 
 export function enableThreadReaderMode() {
-  checkForURLChanges();
+  document.head.insertAdjacentHTML("beforeend", styles);
   addCloseButton();
   window.scrollTo(0, 0);
   document.getElementById("react-root")?.classList.add("thread-reader-mode");
@@ -158,7 +159,7 @@ export function checkForAddingReaderButton(parentTweetId = "") {
           "beforeend",
           `<button id="open-reader-mode" class="open-reader-mode">View Thread in Reader mode</button>`
         );
-    } else {
+    } else if (parentTweetId.length >= 1) {
       document
         .querySelector(`[data-testid="primaryColumn"] h2`)
         ?.parentElement?.parentElement?.insertAdjacentHTML(
@@ -170,14 +171,14 @@ export function checkForAddingReaderButton(parentTweetId = "") {
 }
 
 export function disableThreadReaderMode() {
+  window.scrollTo(0, 0);
+  document.getElementById("thread-reader-mode-styles")?.remove();
+  document.getElementById("react-root")?.removeAttribute("class");
   document.getElementById("open-reader-mode")?.remove();
   document.getElementById("close-thread-reader-view")?.remove();
-  document.getElementById("react-root")?.classList.remove("thread-reader-mode");
-  checkForAddingReaderButton();
   // @ts-ignore
   document.unbindArrive();
-  // @ts-ignore
-  document.urlChangeObserver?.disconnect();
+  checkForAddingReaderButton();
 }
 
 export function addListenersToDOM() {
