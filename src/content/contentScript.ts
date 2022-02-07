@@ -3,17 +3,15 @@ import checkForThemeChanges from "./checkForThemeChanges";
 import {
   addListenersToDOM,
   checkForAddingReaderButton,
-  checkForURLChanges,
   enableThreadReaderMode,
-  getQueryParams,
   injectScriptToListenForThreadResponse,
+  getQueryParams,
 } from "./threadReader";
 
 export default function init() {
   injectScriptToListenForThreadResponse();
   addListenersToDOM();
   document.addEventListener("DOMContentLoaded", () => {
-    checkForURLChanges();
     checkForThemeChanges();
 
     document
