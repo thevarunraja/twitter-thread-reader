@@ -1,6 +1,6 @@
 {
   "name": "twitter-thread-reader",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Chrome extension that makes reading threads easier",
   "license": "MIT",
   "author": "@thevarunraja",
