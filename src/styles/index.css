@@ -75,7 +75,7 @@ html[class*="__photo__"] {
   }
 
   div[aria-label="Timeline: Conversation"] > div {
-    min-height: 100vh !important;
+    min-height: 30vh !important;
   }
 
   .first-tweet-in-thread [data-testid="caret"] {
