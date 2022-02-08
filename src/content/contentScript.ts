@@ -3,9 +3,10 @@ import checkForThemeChanges from "./checkForThemeChanges";
 import {
   addListenersToDOM,
   checkForAddingReaderButton,
+  checkForURLChanges,
   enableThreadReaderMode,
-  injectScriptToListenForThreadResponse,
   getQueryParams,
+  injectScriptToListenForThreadResponse,
 } from "./threadReader";
 
 export default function init() {
@@ -13,7 +14,7 @@ export default function init() {
   addListenersToDOM();
   document.addEventListener("DOMContentLoaded", () => {
     checkForThemeChanges();
-
+    checkForURLChanges();
     document
       .querySelector("body")
       ?.addEventListener("tweetDetailEvent", (data) => {

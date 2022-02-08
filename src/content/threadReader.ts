@@ -101,13 +101,11 @@ export function addClassToTweetRepliesContainer() {
 export function checkForURLChanges() {
   let oldHref = document.location.href;
   let oldPathName = document.location.pathname?.replaceAll("/", "__");
-  // @ts-ignore
-  document.urlChangeObserver = new MutationObserver(function () {
+  const urlChangeObserver = new MutationObserver(function () {
     if (location.href !== oldHref && location.href.indexOf("photo") <= -1) {
       oldHref = location.href;
       disableThreadReaderMode();
     }
-
     document.querySelector<HTMLElement>("html")?.classList.remove(oldPathName);
     oldPathName = document.location.pathname?.replaceAll("/", "__");
     document
@@ -115,12 +113,10 @@ export function checkForURLChanges() {
       ?.classList.add(document.location.pathname?.replaceAll("/", "__"));
   });
   const config = { subtree: true, childList: true };
-  // @ts-ignore
-  document.urlChangeObserver.observe(document, config);
+  urlChangeObserver.observe(document.querySelector("head") as Node, config);
 }
 
 export function enableThreadReaderMode() {
-  checkForURLChanges();
   addCloseButton();
   window.scrollTo(0, 0);
   document.getElementById("react-root")?.classList.add("thread-reader-mode");
@@ -171,12 +167,12 @@ export function checkForAddingReaderButton(parentTweetId = "") {
 
 export function disableThreadReaderMode() {
   // @ts-ignore
+
   document.unbindArrive();
-  // @ts-ignore
-  document.urlChangeObserver?.disconnect();
+  document.getElementById("react-root")?.classList.remove("thread-reader-mode");
+  window.scrollTo(0, 0);
   document.getElementById("open-reader-mode")?.remove();
   document.getElementById("close-thread-reader-view")?.remove();
-  document.getElementById("react-root")?.classList.remove("thread-reader-mode");
   checkForAddingReaderButton();
 }
 
