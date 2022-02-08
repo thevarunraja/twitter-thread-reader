@@ -11,6 +11,21 @@
   cursor: pointer;
 }
 
+.last-tweet-in-thread ~ div {
+  display: none !important;
+}
+
+.last-tweet-in-thread > div {
+  border-bottom: 0 !important;
+}
+
+.last-tweet-in-thread + div + div {
+  display: block !important;
+  opacity: 0 !important;
+  height: 600px !important;
+  pointer-events: none !important;
+}
+
 .theme-0,
 [style="background-color: rgb(255, 255, 255);"],
 [style="background-color: #FFFFFF;"] {
@@ -73,11 +88,9 @@ html[class*="__photo__"] {
     opacity: 0 !important;
     pointer-events: none !important;
   }
-
   div[aria-label="Timeline: Conversation"] > div {
-    min-height: 30vh !important;
+    min-height: 100vh !important;
   }
-
   .first-tweet-in-thread [data-testid="caret"] {
     display: none !important;
   }
@@ -115,14 +128,6 @@ html[class*="__photo__"] {
 
   .first-tweet-in-thread [role="progressbar"] + div {
     display: none !important;
-  }
-
-  .last-tweet-in-thread ~ div {
-    display: none !important;
-  }
-
-  .last-tweet-in-thread > div {
-    border-bottom: 0 !important;
   }
 
   .first-tweet-in-thread
@@ -181,13 +186,6 @@ html[class*="__photo__"] {
     opacity: 1 !important;
     pointer-events: all !important;
     display: block !important;
-  }
-
-  .last-tweet-in-thread + div + div {
-    display: block !important;
-    opacity: 0 !important;
-    height: 600px !important;
-    pointer-events: none !important;
   }
 }
 

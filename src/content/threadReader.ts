@@ -167,13 +167,15 @@ export function checkForAddingReaderButton(parentTweetId = "") {
 
 export function disableThreadReaderMode() {
   // @ts-ignore
-
   document.unbindArrive();
-  document.getElementById("react-root")?.classList.remove("thread-reader-mode");
   window.scrollTo(0, 0);
+  document.getElementById("react-root")?.classList.remove("thread-reader-mode");
   document.getElementById("open-reader-mode")?.remove();
   document.getElementById("close-thread-reader-view")?.remove();
   checkForAddingReaderButton();
+  setTimeout(() => {
+    document.querySelector(".last-tweet-in-thread")?.removeAttribute("class");
+  }, 20);
 }
 
 export function addListenersToDOM() {
