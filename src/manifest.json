@@ -1,7 +1,7 @@
 {
   "name": "Twitter thread reader",
   "description": "Chrome extension that makes reading twitter threads easier.",
-  "version": "0.1",
+  "version": "0.2",
   "manifest_version": 3,
   "icons": {
     "16": "16.png",
